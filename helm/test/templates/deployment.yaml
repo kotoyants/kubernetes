@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm
+  labels:
+    app: deploy-helm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy-helm
+  template:
+    metadata:
+      labels:
+        app: deploy-helm
+    spec:
+      containers:
+        - name: helm
+          image: forfog/nginx:helm
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: deploy-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy-app
+  template:
+    metadata:
+      labels:
+        app: deploy-app
+    spec:
+      containers:
+        - name: app
+          image: forfog/nginx
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80

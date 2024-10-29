@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubectl
+  labels:
+    app: deploy-kubectl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy-kubectl
+  template:
+    metadata:
+      labels:
+        app: deploy-kubectl
+    spec:
+      containers:
+        - name: kubectl
+          image: forfog/nginx:kubectl
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
